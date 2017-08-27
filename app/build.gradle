@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.androidapp"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 3
+        versionName "1.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk{
+//            //选择要添加的对应cpu类型的.so库。
+//            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a',
+//                    'x86', 'x86_64', 'mips', 'mips64'
+//        }
+//        manifestPlaceholders = [
+//                JPUSH_PKGNAME : applicationId,
+//                JPUSH_APPKEY : "234a570c9bcf38088d6f8429", //JPush上注册的包名对应的appkey.
+//                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+//        ]
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    greendao {
+        /*schemaVersion： 数据库schema版本，也可以理解为数据库版本号
+        *daoPackage：设置DaoMaster、DaoSession、Dao包名
+        *targetGenDir：设置DaoMaster、DaoSession、Dao目录
+        *targetGenDirTest：设置生成单元测试目录
+        *generateTests：设置自动生成单元测试用例
+         */
+        schemaVersion 1//数据库版本号
+        daoPackage 'com.greendao.gen'
+        targetGenDir 'src/main/java'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile files('libs/fastjson-1.2.4.jar')
+    compile files('libs/greendao-generator-3.2.2.jar')
+    //compile project(':easeui')
+    compile files('libs/MobCommons-2017.0608.1618.jar')
+    compile files('libs/MobTools-2017.0608.1618.jar')
+    compile files('libs/ShareSDK-Core-3.0.0.jar')
+    compile files('libs/ShareSDK-Email-3.0.0.jar')
+    compile files('libs/ShareSDK-GooglePlus-3.0.0.jar')
+    compile files('libs/ShareSDK-QQ-3.0.0.jar')
+    compile files('libs/ShareSDK-QZone-3.0.0.jar')
+    compile files('libs/ShareSDK-ShortMessage-3.0.0.jar')
+    compile files('libs/ShareSDK-SinaWeibo-3.0.0.jar')
+    compile files('libs/ShareSDK-TencentWeibo-3.0.0.jar')
+    compile files('libs/ShareSDK-Wechat-Core-3.0.0.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-3.0.0.jar')
+    //    compile 'cn.jiguang.sdk:jpush:3.0.7'  // 此处以JPush 3.0.7 版本为例。
+
+    //    compile 'cn.jiguang.sdk:jcore:1.1.5'  // 此处以JCore 1.1.5 版本为例。
+    compile files('libs/jpush-android-3.0.7.jar')
+    compile files('libs/jcore-android-1.1.5.jar')
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jakewharton:butterknife:8.6.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.romandanylyk:pageindicatorview:0.2.0'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.7'
+    compile 'fm.jiecao:jiecaovideoplayer:3.1'
+    compile 'org.greenrobot:greendao:3.1.0+'
+    compile 'cn.yipianfengye.android:zxing-library:2.1+'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.github.ctiao:DanmakuFlameMaster:0.8.3'
+    compile 'com.github.ctiao:ndkbitmap-armv7a:0.8.3'
+    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.5'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.5'
+    compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.7.5'
+    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.7.5'
+    compile 'com.android.support:support-v4:26.+'
+    compile 'org.jsoup:jsoup:1.8.3'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+}
